@@ -1,4 +1,4 @@
-FROM t4j/chainerapp-test:0.1
+FROM t4j/chainerapp-dummy:latest
 
 RUN pip install tornado
 

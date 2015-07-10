@@ -1,0 +1,5 @@
+FROM t4j/chainerapp:latest
+
+RUN pip install tornado
+
+RUN mkdir -p /opt/t4j/serverapp
