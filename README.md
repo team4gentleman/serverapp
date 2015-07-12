@@ -8,15 +8,13 @@ serverapp
 ## How to use
 
 ####Fork & Clone
-- https://github.com/(GIT_ID)/chainer.git
 - https://github.com/(GIT_ID)/serverapp.git
 - https://github.com/(GIT_ID)/chainerapp.git
-- https://github.com/(GIT_ID)/clientapp.git
 
 ####First Setting
 ex.
 vi ~/.bash_profile
-exportGIT_HOME=/Users/(OS_ID)/git
+exportGIT_HOME=/Users/(UID)/git
 
 ####Build DockerImage
   $ ./1_build_serverapp-test.sh
@@ -30,10 +28,17 @@ exportGIT_HOME=/Users/(OS_ID)/git
 ####Login Container
   $ ./4_exec_serverapp-test.sh
 
-####Exec RestService
-  $ docker exec -it serverapp-test-up python /opt/t4j/serverapp/rest-service.py
+####Start RestService
+  $ docker exec -it serverapp-test-up service v-tornado start
 
-stop[Ctrl+c]
+####Stop RestService
+  $ docker exec -it serverapp-test-up service v-tornado stop
+
+####Start WebServer
+  $ docker exec -it serverapp-test-up service v-nginx start
+
+####Stop WebServer
+  $ docker exec -it serverapp-test-up service v-nginx stop
 
 ####Browser Access
   $ boot2docker ip
