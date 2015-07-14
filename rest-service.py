@@ -1,11 +1,13 @@
 #!/bin/env python
 # -*- coding: utf-8 -*-
+from numpy import *
 import tornado.escape
-from tornado import gen
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
+
+import nurse_train_api
 
 from tornado.options import define, options
 
@@ -33,8 +35,11 @@ class HomeHandler(BaseHandler):
 
 class DiagnoseHandler(BaseHandler):
     def get(self):
-        # TODO
-        self.write({"status": 200, "condition": 1})
+        # TODO API-CALL
+        # export PYTHONPATH=/opt/t4j/chainerapp(~/.bashrc)
+        # def inspection(/opt/t4j/chainerapp/nurse_train_api.py)
+        ret = nurse_train_api.inspection()
+        self.write({"status": 200, "condition": ret[0,1], "rate": ret[0,2]})
 
 
 def main():
