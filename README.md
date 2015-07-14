@@ -28,11 +28,19 @@ exportGIT_HOME=/Users/(UID)/git
 ####Login Container
   $ ./4_exec_serverapp-test.sh
 
+<<<<<<< HEAD
 ####Start RestService # w-tornado -> for fileuploadform
   $ docker exec -it serverapp-test-up service v-tornado start  
   $ docker exec -it serverapp-test-up service w-tornado start
 
 ####Stop RestService # w-tornado -> for fileuploadform
+  $ docker exec -it serverapp-test-up service v-tornado stop  
+=======
+####Start RestService
+  $ docker exec -it serverapp-test-up service v-tornado start  
+  $ docker exec -it serverapp-test-up service w-tornado start
+
+####Stop RestService
   $ docker exec -it serverapp-test-up service v-tornado stop  
   $ docker exec -it serverapp-test-up service w-tornado stop
 
@@ -46,5 +54,5 @@ exportGIT_HOME=/Users/(UID)/git
   $ boot2docker ip
   192.168.59.103
 
-ex. http://192.168.59.103:8080/
+ex. http://192.168.59.103:8080/  
 ex. http://192.168.59.103:8888/
