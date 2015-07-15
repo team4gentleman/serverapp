@@ -25,3 +25,5 @@ RUN echo "import numpy as np" > /opt/t4j/chainerapp/inspection_cls.py && \
   echo "" >> /opt/t4j/chainerapp/inspection_cls.py && \
   echo "    if __name__ == \"__main__\":" >> /opt/t4j/chainerapp/inspection_cls.py && \
   echo "        print execute('/var/opt/t4j/chainer-data/tmpimages/image0000000.jpg')" >> /opt/t4j/chainerapp/inspection_cls.py
+
+  RUN echo "touch /opt/t4j/chainerapp/__init__py"

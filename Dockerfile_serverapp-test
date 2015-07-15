@@ -25,7 +25,7 @@ RUN echo "#! /bin/bash" > /etc/init.d/v-tornado && \
   echo "case \"\$1\" in" >> /etc/init.d/v-tornado && \
   echo "  start)" >> /etc/init.d/v-tornado && \
   echo "        echo \"tornado startup...\"" >> /etc/init.d/v-tornado && \
-  echo "        /usr/bin/python /opt/t4j/serverapp/rest-service.py >> /var/log/t4j/serverapp/serverapp.log 2>&1 &" >> /etc/init.d/v-tornado && \
+  echo "        PYTHONPATH=/opt/t4j/chainerapp /usr/bin/python /opt/t4j/serverapp/rest-service.py >> /var/log/t4j/serverapp/serverapp.log 2>&1 &" >> /etc/init.d/v-tornado && \
   echo "        ;;" >> /etc/init.d/v-tornado && \
   echo "  stop)" >> /etc/init.d/v-tornado && \
   echo "        echo \"tornado shutdown...\"" >> /etc/init.d/v-tornado && \
@@ -43,4 +43,32 @@ RUN echo "#! /bin/bash" > /etc/init.d/v-tornado && \
   echo "exit 0" >> /etc/init.d/v-tornado && \
   chmod 755 /etc/init.d/v-tornado
 
+
 RUN echo "export PYTHONPATH=/opt/t4j/chainerapp" >> ~/.bashrc
+
+RUN echo "#! /bin/bash" > /etc/init.d/w-tornado && \
+  echo "##" >> /etc/init.d/w-tornado && \
+  echo "# w-tornado service for t4j" >> /etc/init.d/w-tornado && \
+  echo "##" >> /etc/init.d/w-tornado && \
+  echo "case \"\$1\" in" >> /etc/init.d/w-tornado && \
+  echo "  start)" >> /etc/init.d/w-tornado && \
+  echo "        echo \"tornado startup...\"" >> /etc/init.d/w-tornado && \
+  echo "        /usr/bin/python /opt/t4j/serverapp/mobilenurserest.py >> /var/log/t4j/serverapp/serverapp2.log &" >> /etc/init.d/w-tornado && \
+  echo "        ;;" >> /etc/init.d/w-tornado && \
+  echo "  stop)" >> /etc/init.d/w-tornado && \
+  echo "        echo \"tornado shutdown...\"" >> /etc/init.d/w-tornado && \
+  echo "        ps -ef | grep rest-service.py | grep -v grep | awk '{print\"kill \"\$2}' | sh" >> /etc/init.d/w-tornado && \
+  echo "        ;;" >> /etc/init.d/w-tornado && \
+  echo "  reload|restart|force-reload|status)" >> /etc/init.d/w-tornado && \
+  echo "        echo \"not suppert option.[\$1]\"" >> /etc/init.d/w-tornado && \
+  echo "        ;;" >> /etc/init.d/w-tornado && \
+  echo "  *)" >> /etc/init.d/w-tornado && \
+  echo "        echo \"Usage: {start\|stop}\"" >> /etc/init.d/w-tornado && \
+  echo "        exit 1" >> /etc/init.d/w-tornado && \
+  echo "        ;;" >> /etc/init.d/w-tornado && \
+  echo "esac" >> /etc/init.d/w-tornado && \
+  echo "" >> /etc/init.d/w-tornado && \
+  echo "exit 0" >> /etc/init.d/w-tornado && \
+  chmod 755 /etc/init.d/w-tornado
+
+RUN pip install Pillow
