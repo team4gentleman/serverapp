@@ -1,13 +1,13 @@
 #!/bin/env python
 # -*- coding: utf-8 -*-
-from numpy import *
+import numpy as np
 import tornado.escape
 import tornado.httpserver
 import tornado.ioloop
 import tornado.options
 import tornado.web
 
-import nurse_train_api
+import inspection_cls
 
 from tornado.options import define, options
 
@@ -37,9 +37,9 @@ class DiagnoseHandler(BaseHandler):
     def get(self):
         # TODO API-CALL
         # export PYTHONPATH=/opt/t4j/chainerapp(~/.bashrc)
-        # def inspection(/opt/t4j/chainerapp/nurse_train_api.py)
-        ret = nurse_train_api.inspection()
-        self.write({"status": 200, "condition": ret[0,1], "rate": ret[0,2]})
+        ins = inspection_cls.Inspection()
+        ret = ins.execute('/var/opt/t4j/chainer-data/tmpimages/image0000000.jpg')
+        self.write({"status": 200, "condition": ret[0,0], "score": ret[0,1]})
 
 
 def main():

@@ -16,11 +16,12 @@ RUN mkdir -p /opt/chainerapp && mkdir -p /opt/t4j/chainerapp && mkdir -p /opt/t4
 
 RUN mkdir -p /opt/t4j/chainerapp && mkdir -p /var/opt/t4j/chainer-data/mstimeges && mkdir -p /var/opt/t4j/chainer-data/imeges && mkdir -p /var/opt/t4j/chainer-data/model && mkdir -p /var/opt/t4j/chainer-data/tmpimages
 
-RUN echo "from numpy import *" > /opt/t4j/chainerapp/nurse_train_api.py && \
-  echo "" >> /opt/t4j/chainerapp/nurse_train_api.py && \
-  echo "def inspection():" >> /opt/t4j/chainerapp/nurse_train_api.py && \
-  echo "    ret = array([[1,\"hengao\",25.8],[2,\"bad\",25.1],[3,\"drunken\",20.7],[4,\"excellent\",11.0],[5,\"normal\",4.0]])" >> /opt/t4j/chainerapp/nurse_train_api.py && \
-  echo "    return ret" >> /opt/t4j/chainerapp/nurse_train_api.py && \
-  echo "" >> /opt/t4j/chainerapp/nurse_train_api.py && \
-  echo "if __name__ == \"__main__\":" >> /opt/t4j/chainerapp/nurse_train_api.py && \
-  echo "    print inspection()" >> /opt/t4j/chainerapp/nurse_train_api.py
+RUN echo "import numpy as np" > /opt/t4j/chainerapp/inspection_cls.py && \
+  echo "" >> /opt/t4j/chainerapp/inspection_cls.py && \
+  echo "class Inspection():" >> /opt/t4j/chainerapp/inspection_cls.py && \
+  echo "    def execute(self, imgfile, modelfile='model', meanfile='mean.npy'):" >> /opt/t4j/chainerapp/inspection_cls.py && \
+  echo "        ret = np.array([('normal', 0.20466148853302002), ('hengao', 0.1924593597650528), ('excellent', 0.07535989582538605), ('bad', 0.07535989582538605), ('drunker', 0.07535989582538605), ('hd', 0.07535989582538605)])" >> /opt/t4j/chainerapp/inspection_cls.py && \
+  echo "        return ret" >> /opt/t4j/chainerapp/inspection_cls.py && \
+  echo "" >> /opt/t4j/chainerapp/inspection_cls.py && \
+  echo "    if __name__ == \"__main__\":" >> /opt/t4j/chainerapp/inspection_cls.py && \
+  echo "        print execute('/var/opt/t4j/chainer-data/tmpimages/image0000000.jpg')" >> /opt/t4j/chainerapp/inspection_cls.py
