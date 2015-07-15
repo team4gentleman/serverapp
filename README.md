@@ -28,11 +28,11 @@ exportGIT_HOME=/Users/(UID)/git
 ####Login Container
   $ ./4_exec_serverapp-test.sh
 
-####Start RestService
+####Start RestService # w-tornado -> for fileuploadform
   $ docker exec -it serverapp-test-up service v-tornado start  
   $ docker exec -it serverapp-test-up service w-tornado start
 
-####Stop RestService
+####Stop RestService # w-tornado -> for fileuploadform
   $ docker exec -it serverapp-test-up service v-tornado stop  
   $ docker exec -it serverapp-test-up service w-tornado stop
 
