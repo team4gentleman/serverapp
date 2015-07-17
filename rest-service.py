@@ -7,7 +7,12 @@ import tornado.ioloop
 import tornado.options
 import tornado.web
 
+import os, uuid
+from PIL import Image, ImageFilter
+
 import inspection_cls
+
+__UPLOADS__ = "/var/opt/t4j/chainer-data/tmpimages/"
 
 from tornado.options import define, options
 
@@ -34,12 +39,22 @@ class HomeHandler(BaseHandler):
         self.write({"status": 200, "message": "It works!!"})
 
 class DiagnoseHandler(BaseHandler):
-    def get(self):
-        # TODO API-CALL
-        # export PYTHONPATH=/opt/t4j/chainerapp(~/.bashrc)
+    def post(self):
+        fileinfo = self.request.files['filearg'][0]
+        print ("fileinfo is"), fileinfo
+        fname = fileinfo['filename']
+        extn = os.path.splitext(fname)[1]
+        cname = str(uuid.uuid4()) + extn
+        fh = open(__UPLOADS__ + cname, 'wb')
+        print (fileinfo['body'])
+        fh.write(fileinfo['body'])
+
+        # API-CALL
         ins = inspection_cls.Inspection()
-        ret = ins.execute('/var/opt/t4j/chainer-data/tmpimages/image0000000.jpg')
-        self.write({"status": 200, "condition": ret[0,0], "score": ret[0,1]})
+        ret = ins.execute(__UPLOADS__ + cname)
+
+        # TODO
+        self.write({"status": 200, "diagnoses": [{"runk": 1, "condition": ret[0,0], "score": ret[0,1]},{"runk": 1, "condition": ret[1,0], "score": ret[2,1]}]})
 
 
 def main():
