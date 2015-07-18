@@ -22,6 +22,7 @@ class Application(tornado.web.Application):
     def __init__(self):
         handlers = [
             (r"/", HomeHandler),
+            (r"/form", UserformHandler),
             (r"/diagnose", DiagnoseHandler),
         ]
         settings = dict(
@@ -37,6 +38,10 @@ class BaseHandler(tornado.web.RequestHandler):
 class HomeHandler(BaseHandler):
     def get(self):
         self.write({"status": 200, "message": "It works!!"})
+
+class UserformHandler(tornado.web.RequestHandler):
+    def get(self):
+        self.render("fileuploadform.html")
 
 class DiagnoseHandler(BaseHandler):
     def post(self):
@@ -54,7 +59,7 @@ class DiagnoseHandler(BaseHandler):
         ret = ins.execute(__UPLOADS__ + cname)
 
         # TODO
-        self.write({"status": 200, "diagnoses": [{"runk": 1, "condition": ret[0,0], "score": ret[0,1]},{"runk": 1, "condition": ret[1,0], "score": ret[2,1]}]})
+        self.write({"status": 200, "diagnoses": [{"runk": 1, "condition": ret[0,0], "score": ret[0,1]},{"runk": 2, "condition": ret[1,0], "score": ret[2,1]}]})
 
 
 def main():
