@@ -17,24 +17,22 @@ vi ~/.bash_profile
 exportGIT_HOME=/Users/(UID)/git
 
 ####Build DockerImage
-  $ ./1_build_serverapp-test.sh
+  $ ./dockerbin/1_build_serverapp-test.sh
 
 ####Start Container
-  $ ./2_run_serverapp-test.sh
+  $ ./dockerbin/2_run_serverapp-test.sh
 
 ####Stop & Delete Container
-  $ ./3_stop_serverapp-test.sh
+  $ ./dockerbin/3_stop_serverapp-test.sh
 
 ####Login Container
-  $ ./4_exec_serverapp-test.sh
+  $ ./dockerbin/4_exec_serverapp-test.sh
 
-####Start RestService # w-tornado -> for fileuploadform
+####Start RestService
   $ docker exec -it serverapp-test-up service v-tornado start  
-  $ docker exec -it serverapp-test-up service w-tornado start
 
-####Stop RestService # w-tornado -> for fileuploadform
+####Stop RestService
   $ docker exec -it serverapp-test-up service v-tornado stop  
-  $ docker exec -it serverapp-test-up service w-tornado stop
 
 ####Start WebServer
   $ docker exec -it serverapp-test-up service v-nginx start
@@ -51,7 +49,6 @@ ex. http://192.168.59.103:8888/
 
 ####Procedure Browser Access
 - hosts setting
+
  ex. 192.168.59.103		mobilenurse.t4j.com
  ex. http://mobilenurse.t4j.com/form
-
- 

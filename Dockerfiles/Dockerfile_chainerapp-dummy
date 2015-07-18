@@ -6,24 +6,6 @@ RUN apt-get install -y zip
 RUN apt-get install -y python-pip python-dev
 
 RUN pip install numpy
+RUN pip install Pillow
 
-#RUN apt-get -y install python-opencv
-#RUN apt-get -y build-dep python-imaging
-#RUN apt-get -y install libjpeg8 libjpeg62-dev libfreetype6 libfreetype6-dev
-#RUN pip install Pillow
-
-RUN mkdir -p /opt/chainerapp && mkdir -p /opt/t4j/chainerapp && mkdir -p /opt/t4j/chainerapp/mstimeges && mkdir -p /opt/t4j/chainerapp/imeges && mkdir -p /opt/t4j/chainerapp/tmpimages
-
-RUN mkdir -p /opt/t4j/chainerapp && mkdir -p /var/opt/t4j/chainer-data/mstimeges && mkdir -p /var/opt/t4j/chainer-data/imeges && mkdir -p /var/opt/t4j/chainer-data/model && mkdir -p /var/opt/t4j/chainer-data/tmpimages
-
-RUN echo "import numpy as np" > /opt/t4j/chainerapp/inspection_cls.py && \
-  echo "" >> /opt/t4j/chainerapp/inspection_cls.py && \
-  echo "class Inspection():" >> /opt/t4j/chainerapp/inspection_cls.py && \
-  echo "    def execute(self, imgfile, modelfile='model', meanfile='mean.npy'):" >> /opt/t4j/chainerapp/inspection_cls.py && \
-  echo "        ret = np.array([('normal', 0.20466148853302002), ('hengao', 0.1924593597650528), ('excellent', 0.07535989582538605), ('bad', 0.07535989582538605), ('drunker', 0.07535989582538605), ('hd', 0.07535989582538605)])" >> /opt/t4j/chainerapp/inspection_cls.py && \
-  echo "        return ret" >> /opt/t4j/chainerapp/inspection_cls.py && \
-  echo "" >> /opt/t4j/chainerapp/inspection_cls.py && \
-  echo "    if __name__ == \"__main__\":" >> /opt/t4j/chainerapp/inspection_cls.py && \
-  echo "        print execute('/var/opt/t4j/chainer-data/tmpimages/image0000000.jpg')" >> /opt/t4j/chainerapp/inspection_cls.py
-
-  RUN echo "touch /opt/t4j/chainerapp/__init__py"
+RUN mkdir -p /opt/chainerapp && mkdir -p /opt/t4j/chainerapp && mkdir -p /opt/t4j/chainerapp/dlbin && mkdir -p /opt/t4j/chainerapp/dockerbin && mkdir -p /opt/t4j/chainerapp/Dockerfiles && mkdir -p /opt/t4j/chainerapp/python
