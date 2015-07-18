@@ -8,39 +8,17 @@ RUN pip install tornado
 
 RUN mkdir -p /opt/t4j/serverapp && mkdir -p /var/log/t4j/serverapp
 
-RUN echo "server {" > /etc/nginx/sites-available/t4j && \
-  echo "    listen   80;" >> /etc/nginx/sites-available/t4j && \
-  echo "    location / {" >> /etc/nginx/sites-available/t4j && \
-  echo "        proxy_pass http://localhost:8080;" >> /etc/nginx/sites-available/t4j && \
-  echo "    }" >> /etc/nginx/sites-available/t4j && \
-  echo "}" >> /etc/nginx/sites-available/t4j && \
-  ln -s /etc/nginx/sites-available/t4j /etc/nginx/sites-enabled/t4j && \
+COPY ./service/v-tornado /etc/init.d/
+
+COPY ./nginx/t4j /etc/nginx/sites-available/
+RUN ln -s /etc/nginx/sites-available/t4j /etc/nginx/sites-enabled/t4j && \
   rm -f /etc/nginx/sites-enabled/default && \
   mv /etc/init.d/nginx /etc/init.d/v-nginx
 
-RUN echo "#! /bin/bash" > /etc/init.d/v-tornado && \
-  echo "##" >> /etc/init.d/v-tornado && \
-  echo "# v-tornado service for t4j" >> /etc/init.d/v-tornado && \
-  echo "##" >> /etc/init.d/v-tornado && \
-  echo "case \"\$1\" in" >> /etc/init.d/v-tornado && \
-  echo "  start)" >> /etc/init.d/v-tornado && \
-  echo "        echo \"tornado startup...\"" >> /etc/init.d/v-tornado && \
-  echo "        PYTHONPATH=/opt/t4j/chainerapp/python /usr/bin/python /opt/t4j/serverapp/python/rest-service.py >> /var/log/t4j/serverapp/serverapp.log 2>&1 &" >> /etc/init.d/v-tornado && \
-  echo "        ;;" >> /etc/init.d/v-tornado && \
-  echo "  stop)" >> /etc/init.d/v-tornado && \
-  echo "        echo \"tornado shutdown...\"" >> /etc/init.d/v-tornado && \
-  echo "        ps -ef | grep rest-service.py | grep -v grep | awk '{print\"kill \"\$2}' | sh" >> /etc/init.d/v-tornado && \
-  echo "        ;;" >> /etc/init.d/v-tornado && \
-  echo "  reload|restart|force-reload|status)" >> /etc/init.d/v-tornado && \
-  echo "        echo \"not suppert option.[\$1]\"" >> /etc/init.d/v-tornado && \
-  echo "        ;;" >> /etc/init.d/v-tornado && \
-  echo "  *)" >> /etc/init.d/v-tornado && \
-  echo "        echo \"Usage: {start\|stop}\"" >> /etc/init.d/v-tornado && \
-  echo "        exit 1" >> /etc/init.d/v-tornado && \
-  echo "        ;;" >> /etc/init.d/v-tornado && \
-  echo "esac" >> /etc/init.d/v-tornado && \
-  echo "" >> /etc/init.d/v-tornado && \
-  echo "exit 0" >> /etc/init.d/v-tornado && \
-  chmod 755 /etc/init.d/v-tornado
+COPY ./dummy_python/inspection_cls.py /opt/t4j/chainerapp/python/
+RUN echo "export PYTHONPATH=/opt/t4j/chainerapp/python" >> ~/.bashrc
+CMD source ~/.bashrc
 
-RUN echo "export PYTHONPATH=/opt/t4j/chainerapp" >> ~/.bashrc
+#EXPOSE 80
+CMD service v-tornado start && tail -f /dev/null
+CMD service v-nginx start && tail -f /dev/null

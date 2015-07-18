@@ -1,0 +1,23 @@
+#! /bin/bash
+##
+# v-tornado service for t4j
+##
+case "$1" in
+  start)
+        echo "tornado startup..."
+        PYTHONPATH=/opt/t4j/chainerapp/python /usr/bin/python /opt/t4j/serverapp/python/rest-service.py >> /var/log/t4j/serverapp/serverapp.log 2>&1 &
+        ;;
+  stop)
+        echo "tornado shutdown..."
+        ps -ef | grep rest-service.py | grep -v grep | awk '{print"kill "$2}' | sh
+        ;;
+  reload|restart|force-reload|status)
+        echo "not suppert option.[$1]"
+        ;;
+  *)
+        echo "Usage: {start\|stop}"
+        exit 1
+        ;;
+esac
+
+exit 0
