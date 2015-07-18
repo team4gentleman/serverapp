@@ -42,9 +42,16 @@ exportGIT_HOME=/Users/(UID)/git
 ####Stop WebServer
   $ docker exec -it serverapp-test-up service v-nginx stop
 
-####Browser Access
+####Debug Browser Access
   $ boot2docker ip
   192.168.59.103
 
 ex. http://192.168.59.103:8080/  
 ex. http://192.168.59.103:8888/
+
+####Procedure Browser Access
+- hosts setting
+ ex. 192.168.59.103		mobilenurse.t4j.com
+ ex. http://mobilenurse.t4j.com/form
+
+ 
