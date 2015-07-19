@@ -18,8 +18,7 @@ RUN ln -s /etc/nginx/sites-available/t4j /etc/nginx/sites-enabled/t4j && \
 
 COPY ./dummy_python/inspection_cls.py /opt/t4j/chainerapp/python/
 RUN echo "export PYTHONPATH=/opt/t4j/chainerapp/python" >> ~/.bashrc
-CMD source ~/.bashrc
 
 #EXPOSE 80
-CMD service v-tornado start && tail -f /dev/null
-CMD service v-nginx start && tail -f /dev/null
+#CMD source ~/.bashrc && service v-tornado start && service v-nginx start && tail -f /dev/null
+CMD source ~/.bashrc && service v-tornado start && tail -f /dev/null
