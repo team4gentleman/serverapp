@@ -18,7 +18,7 @@ cd $GIT_HOME/chainer-data
 [ -e model ] || mkdir model
 [ -e tmpimages ] || mkdir tmpimages
 
-docker run --name serverapp-test-up -i -t -d -p 8080:8080 -p 80:80 -p 8888:8888 \
+docker run --name serverapp-test-up -i -t -d -p 8080:8080 -p 8888:8888 \
   -v $GIT_HOME/serverapp:/opt/t4j/serverapp \
   -v $GIT_HOME/chainer-data:/var/opt/t4j/chainer-data \
   t4j/serverapp-test:latest
