@@ -115,12 +115,12 @@ class DiagnoseHandler(BaseHandler):
         if (sex == 'female') and (age == '50') and (health == 'good'):    message = "女性、50歳、お肌の調子よさそうですね！"
         if (sex == 'female') and (age == '50') and (health == 'bad'):     message = "女性、50歳、お疲れですか？"
         if (sex == 'female') and (age == '50') and (health == 'drunker'): message = "女性、50歳、酔っちゃいました？"
-        if (sex == 'female') and (age == '40') and (health == 'good'):    message = "女性、40歳、お肌の調子よさそうですね！"
-        if (sex == 'female') and (age == '40') and (health == 'bad'):     message = "女性、40歳、お疲れですか？"
-        if (sex == 'female') and (age == '40') and (health == 'drunker'): message = "女性、40歳、酔っちゃいました？"
-        if (sex == 'female') and (age == '30') and (health == 'good'):    message = "女性、30歳、お肌の調子よさそうですね！"
-        if (sex == 'female') and (age == '30') and (health == 'bad'):     message = "女性、30歳、お疲れですか？"
-        if (sex == 'female') and (age == '30') and (health == 'drunker'): message = "女性、30歳、酔っちゃいました？"
+        if (sex == 'female') and (age == '40') and (health == 'good'):    message = "女性、50歳、お肌の調子よさそうですね！"
+        if (sex == 'female') and (age == '40') and (health == 'bad'):     message = "女性、50歳、お疲れですか？"
+        if (sex == 'female') and (age == '40') and (health == 'drunker'): message = "女性、50歳、酔っちゃいました？"
+        if (sex == 'female') and (age == '30') and (health == 'good'):    message = "女性、50歳、お肌の調子よさそうですね！"
+        if (sex == 'female') and (age == '30') and (health == 'bad'):     message = "女性、50歳、お疲れですか？"
+        if (sex == 'female') and (age == '30') and (health == 'drunker'): message = "女性、50歳、酔っちゃいました？"
         
         # print(message)
         
