@@ -59,6 +59,7 @@ class DiagnoseHandler(BaseHandler):
         # API-CALL
         ins = inspection_cls.Inspection()
         ret = ins.execute(__UPLOADS__ + cname)
+        ret = np.array(ret)
 
         # ins.executeからの返り値の想定
         #ret = np.array([
